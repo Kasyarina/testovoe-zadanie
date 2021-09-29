@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!--Подключаем библиотеку-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+ 	<style>
+    #filter-table{
+        width: 100%;
+    }
+    #filter-table th{
+        background-color: #dadada;
+    }
+    #filter-table td, #filter-table th{
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+    }
+</style>
+
+
+
+
+<table id="filter-table">
+
+    <tr>
+        <th>Название</th>
+        <th>Автор</th>
+        <th>Жанр</th>
+        <th>Год прочтения</th>
+    </tr>
+    <tr class='table-filters'>
+        <td>
+            <input type="text"/>
+        </td>
+        <td>
+            <input type="text"/>
+        </td>
+        <td>
+            <input type="text"/>
+        </td>
+        <td>
+            <input type="text"/>
+        </td>
+    </tr>
+    <tr class='table-data'>
+        <td>Гордость и предубеждение</td>
+        <td>Джейн Остин</td>
+        <td>Роман</td>
+        <td>2021</td>
+    </tr>
+    <tr class='table-data'>
+        <td>1984</td>
+        <td>Джордж Оруэлл</td>
+        <td>Роман</td>
+        <td>2021</td>
+    </tr>
+    <tr class='table-data'>
+        <td>Повелитель мух</td>
+        <td>Уильям Голдинг</td>
+        <td>Роман</td>
+        <td>2021</td>
+    </tr>
+    <tr class='table-data'>
+        <td>Мастер и Маргарита</td>
+        <td>Михаил Булгаков</td>
+        <td>Роман</td>
+        <td>2021</td>
+    </tr>
+    <tr class='table-data'>
+        <td>Поднятая целина</td>
+        <td>Михаил Шолохов</td>
+        <td>Роман</td>
+        <td>2020</td>
+    </tr>
+    <tr class='table-data'>
+        <td>На ростанях</td>
+        <td>Якуб Колас</td>
+        <td>Роман</td>
+        <td>2020</td>
+    </tr>
+    <tr class='table-data'>
+        <td>Люди на болоте</td>
+        <td>Иван Мележ</td>
+        <td>Роман</td>
+        <td>2020</td>
+    </tr>
+    <tr class='table-data'>
+        <td>Война и мир</td>
+        <td>Лев Толстой</td>
+        <td>Роман</td>
+        <td>2019</td>
+    </tr>
+    <tr class='table-data'>
+        <td>Анна Каренина</td>
+        <td>Лев Толстой</td>
+        <td>Роман</td>
+        <td>2019</td>
+    </tr>
+    <tr class='table-data'>
+        <td>Сто лет одиночества</td>
+        <td>Габриэль Гарсиа Маркес</td>
+        <td>Роман</td>
+        <td>2018</td>
+    </tr>
+</table>
+<script>
+$('.table-filters input').on('input', function () {
+    filterTable($(this).parents('table'));
+});
+
+function filterTable($table) {
+    var $filters = $table.find('.table-filters td');
+    var $rows = $table.find('.table-data');
+    $rows.each(function (rowIndex) {
+        var valid = true;
+        $(this).find('td').each(function (colIndex) {
+            if ($filters.eq(colIndex).find('input').val()) {
+                if ($(this).html().toLowerCase().indexOf(
+                $filters.eq(colIndex).find('input').val().toLowerCase()) == -1) {
+                    valid = valid && false;
+                }
+            }
+        });
+        if (valid === true) {
+            $(this).css('display', '');
+        } else {
+            $(this).css('display', 'none');
+        }
+    });
+}
+</script>
+
+ 		 	</body>
+ 	</html>
